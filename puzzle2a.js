@@ -1,4 +1,4 @@
-const input = require('./puzzle2a_input.json');
+const input = require('./input/puzzle2a_input.json');
 
 function count_letters(string, minimum_count){
 	return new Promise(function(resolve, reject){
