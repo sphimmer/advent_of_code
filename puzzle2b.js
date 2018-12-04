@@ -1,6 +1,8 @@
 const input = require('./input/puzzle2a_input.json');
 
-
+// uses levenshtein distance to see how different the stings are.
+// more complex, still fast, but allows for more use cases like if the strings
+// are different lengths.
 function LevenshteinDistance(string1, string2) {
     // using the Wagner-Fischer algorithm
     // set each element in distance to 0
@@ -18,7 +20,7 @@ function LevenshteinDistance(string1, string2) {
             }
         }
     }
-    return distance;
+    return distance[string1.length][string2.length];
 }
 
 function getDistanceMatrix(s1, s2) {
@@ -38,19 +40,41 @@ function getDistanceMatrix(s1, s2) {
     return d;
 }
 
+// simple solution that works for this data set
+// only works if strings are same length
+function getCommonLetters(s1, s2) {
+    let result_string = ""
+    for (let i = 0; i < s1.length; i++) {
+        if (s1.charAt(i) == s2.charAt(i)) {
+            result_string += s1.charAt(i);
+        }
+    }
+    return result_string;
+}
 
-function puzzle2b(input) {
+function puzzle2b_simple(input) {
     for (let i = 0; i < input.length; i++) {
         for (let n = 0; n < input.length; n++) {
-        
-            const d = LevenshteinDistance(input[i], input[n]);
-            if(d[input[i].length][input[n].length] == 1){
-                return [input[i], input[n]];
+            
+            const letters = getCommonLetters(input[i], input[n]);
+            if (letters.length == input[i].length -1){
+                return letters;
             }
         }
     }
 }
 
-console.log(puzzle2b(input));
+function puzzle2b_levenshtein(input) {
+    for (let i = 0; i < input.length; i++) {
+        for (let n = 0; n < input.length; n++) {
+            
+            if (LevenshteinDistance(input[i], input[n]) == 1){
+                return getCommonLetters(input[i], input[n]);
+            }
+        }
+    }
+}
 
+console.log(puzzle2b_simple(input));
+console.log(puzzle2b_levenshtein(input));
 
