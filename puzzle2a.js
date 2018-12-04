@@ -27,7 +27,7 @@ function count_letters(string, minimum_count){
 	});
 }
 
-function get_checksum_values(input){
+function get_checksum(input){
 	return new Promise((resolve, reject)=>{
 		const twos = [];
 		const threes = [];
@@ -67,6 +67,6 @@ function get_checksum_values(input){
 
 }
 
-get_checksum_values(input).then((res)=>{
+get_checksum(input).then((res)=>{
 	console.log("Checksum: ", res)
 });
