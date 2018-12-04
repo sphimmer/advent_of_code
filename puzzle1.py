@@ -8,9 +8,11 @@ def binary_search(needle, stack):
         if needle == stack[middle]:
             return True
         if needle > stack[middle]:
-           return binary_search(needle,stack[middle:])
+            # search right side
+           return binary_search(needle, stack[middle:])
         elif needle < stack[middle]:
-           return binary_search(needle,stack[:middle])
+            # search left side
+           return binary_search(needle, stack[:middle])
     else:
         return False
 
