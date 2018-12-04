@@ -70,3 +70,4 @@ function get_checksum(input){
 get_checksum(input).then((res)=>{
 	console.log("Checksum: ", res)
 });
+
