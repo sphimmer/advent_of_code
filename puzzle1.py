@@ -14,23 +14,21 @@ def binary_search(needle, stack):
     else:
         return False
 
-def find_2_occurences(puzzle_input, start=0):
-    result = start
+def find_2_occurences(puzzle_input):
+    result = 0
     result_list = []
     searching = True
-    i = 0
+    
     while searching:
-        print(i)
         for n in puzzle_input:
-            if binary_search(result, result_list):
-                searching = False
-                break
-            else:
+            if !binary_search(result, result_list):
                 bisect.insort(result_list, result)
                 result += n
-        i += 1
+            else:
+                searching = False
+                break
+                
     return result
-
 
 print('result: ')
 print(find_2_occurences(p_in))
