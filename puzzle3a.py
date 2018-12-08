@@ -1,5 +1,6 @@
 import json
 from pprint import pprint
+from datetime import datetime
 
 
 def map_claim(claim, fabric):
@@ -46,13 +47,27 @@ def part2(fabric, elf_claims):
         if not has_shared_space(fabric, claim):
             return claim
 
+start = datetime.now()
 with open('./input/puzzle_3.json') as fh:
     elf_claims = json.loads(fh.read())
-    
 shared_spaces, fabric = part1(elf_claims)
+part1_time = datetime.now()
+split1 = part1_time - start
+print(split1.microseconds/1000)
+# print(shared_spaces)
+part2(fabric, elf_claims)
+part2_time = datetime.now()
+split2 = part2_time - part1_time
+print(split2.microseconds/1000)
 
-print(shared_spaces)
-print(part2(fabric, elf_claims))
+# with open('./input/puzzle_3.json') as fh:
+#         elf_claims = json.loads(fh.read())
+# fabric = [[0 for n in range(8)] for i in range(0,8)]
 
+# map_claim({"id": 1, "coord": [1,3], "width": 4, "height": 4}, fabric)
+# map_claim({"id": 2, "coord": [3,1], "width": 4, "height": 4}, fabric)
+# map_claim({"id": 3, "coord": [5,5], "width": 2, "height": 2}, fabric)
+# pprint(fabric)
+# print(count_shared_spaces(fabric))
 
 
