@@ -36,10 +36,11 @@ class Guard(object):
                 self.minutes_asleep += sleep_time.seconds/60
 
     def find_frequent_minute(self):
-        m = 0
+        m = None
         for k in self.minutes:
-            if m in self.minutes:
-                m = k if self.minutes[k] > self.minutes[m] else m
+            if not m:
+                m = k
+            m = k if self.minutes[k] > self.minutes[m] else m
         return m
 
 
@@ -95,11 +96,42 @@ def part1():
             greatest_sleep_time = guards[g].minutes_asleep
             guard_id = guards[g].g_id
 
-    print("Guard: ")
-    print(guard_id)
+    # print("Guard: ")
+    # print(guard_id)
     # print(greatest_sleep_time)
     print(guards[guard_id].find_frequent_minute() * guard_id)
 
-    
+def part2():
+    events = parse_input()
+    guards = sort_events_by_guards(events)
 
+    minute = None
+    guard_id = None
+
+    for g in guards:
+        guards[g].count_minutes_asleep()
+        m = guards[g].find_frequent_minute()
+        # print(guards[g].minutes)
+        # print(guards[g].g_events)
+        # print(guards[g].g_id)
+        # print(m)
+        if guards[g].minutes_asleep > 0:
+            if guards[g].minutes[m] > minute:
+                guard_id = guards[g].g_id
+                minute = guards[g].minutes[m]
+
+    print(guards[guard_id].find_frequent_minute() * guard_id)
+
+start = datetime.now()
 part1()
+part1_time = datetime.now()
+split1 = part1_time - start
+print("part1 time")
+print(split1.microseconds/1000)
+
+part2()
+part2_time = datetime.now()
+split2 = part2_time - part1_time
+print("part2 time")
+print(split2.microseconds/1000)
+
