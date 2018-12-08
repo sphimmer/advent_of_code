@@ -8,7 +8,7 @@ import (
     "path/filepath"
     // "strconv"
     "strings"
-    // "time"
+    "time"
 )
 
 var print = fmt.Println
@@ -42,7 +42,7 @@ func reactPolymer(polymer string) string {
                 // print(difference)
                 // print(string(polymer[pos-1])+string(char))
                 // remove the two characters. they are opposite polarity
-                shrunk_polymer = reactPolymer(strings.Replace(polymer, string(polymer[pos-1])+string(char), "", 1))
+                shrunk_polymer = reactPolymer(strings.Replace(polymer, string(polymer[pos-1])+string(char), "", -1))
                 return shrunk_polymer
             }
         }
@@ -53,8 +53,10 @@ func reactPolymer(polymer string) string {
 }
 
 func main() {
+    start := time.Now()
     polymer_string := parseFile("./input/day5.txt")
     print(len(polymer_string))
     shrunk_polymer := reactPolymer(polymer_string)
     print(len(shrunk_polymer))
+    fmt.Printf("Runtime took %s\n", time.Since(start))
 }
