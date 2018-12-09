@@ -5,7 +5,7 @@ function count_letters(string, minimum_count){
         const letter_count = {};
         //loop through and count each occurence of each letter and save it in an object
         for (let i = 0; i < string.length; i++) {
-            const element = string.charAt(i);
+            const element = string[i];
             if (element in letter_count) {
                 letter_count[element]++;
             } else {

@@ -10,7 +10,7 @@ function LevenshteinDistance(string1, string2) {
     for (let j = 1; j <= string1.length; j++) {
         for (let k = 1; k <= string2.length; k++) {
             
-            if (string1.charAt(k) == string2.charAt(j)) {
+            if (string1[k] == string2[j]) {
                 distance[j][k] = distance[j-1][k-1]
             } else{
                 distance[j][k] = Math.min(distance[j-1][k] + 1,  // a deletion
@@ -45,8 +45,8 @@ function getDistanceMatrix(s1, s2) {
 function getCommonLetters(s1, s2) {
     let result_string = ""
     for (let i = 0; i < s1.length; i++) {
-        if (s1.charAt(i) == s2.charAt(i)) {
-            result_string += s1.charAt(i);
+        if (s1[i] == s2[i]) {
+            result_string += s1[i];
         }
     }
     return result_string;
